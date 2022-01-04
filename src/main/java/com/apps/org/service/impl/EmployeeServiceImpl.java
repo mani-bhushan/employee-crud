@@ -51,10 +51,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmployee(Long id) {
-		return repository
-				.findById(id)
-				.orElseThrow(() -> new EmployeeNotFoundException("Please provide a valid Employee ID: " +  String.valueOf(id)));
+	public Employee getEmployee(String empId) {
+		Optional<Employee> employee = repository.findByEmpId(empId);
+		if (!employee.isPresent()) {
+			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " +  empId);
+		} else {
+			return employee.get();
+		}
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (emp.getEmpId() == null) { 
 				throw new NullPointerException("Please provide Employee ID.");
 			} else if (!(repository.findById(emp.getEmpId()).isPresent())) {
-				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + String.valueOf(emp.getEmpId()));
+				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + emp.getEmpId());
 			} else {
 				employeeResp.add(repository.save(emp));
 			}
@@ -76,11 +79,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	@Transactional
-	public void deleteEmployee(Long id) {
+	public void deleteEmployee(String empId) {
 		
-		Optional<Employee> employee = repository.findById(id);
+		Optional<Employee> employee = repository.findByEmpId(empId);
 		if (!employee.isPresent()) {
-			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " +  String.valueOf(id));
+			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " +  empId);
 		} else {
 			repository.delete(employee.get());
 		}
@@ -94,7 +97,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (emp.getEmpId() == null) {
 				throw new NullPointerException("Please provide Employee ID.");
 			} else if (!(repository.findById(emp.getEmpId()).isPresent())) {
-				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + String.valueOf(emp.getEmpId()));
+				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + emp.getEmpId());
 			}
 		});
 		
@@ -102,15 +105,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeAddressResponse updateEmployeeAddress(Long empId, EmployeeAddressRequest employeeAddressRequest) {
+	public EmployeeAddressResponse updateEmployeeAddress(String empId, EmployeeAddressRequest employeeAddressRequest) {
 
-		Optional<Employee> employee = repository.findById(empId);
+		Optional<Employee> employee = repository.findByEmpId(empId);
 		if (employee.isPresent()) {
 			modelMapper.map(employeeAddressRequest, employee.get());
 			repository.save(employee.get());
 			return modelMapper.map(employee.get(), EmployeeAddressResponse.class);
 		} else {
-			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + String.valueOf(empId));
+			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + empId);
 		}
 	}
 

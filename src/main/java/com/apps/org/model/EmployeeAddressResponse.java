@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @JsonInclude(Include.NON_NULL)
 public class EmployeeAddressResponse extends EmployeeAddressRequest {
 
-	private Long empId;
+	private String empId;
 	private String empName;
 
 }

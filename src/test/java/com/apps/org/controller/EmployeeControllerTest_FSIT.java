@@ -47,7 +47,7 @@ public class EmployeeControllerTest_FSIT {
 	public void test_GetEmployee() {
 		ResponseEntity<Employee> response = template.getForEntity(base.toString() + "rest-api/v1/employees/1",
 				Employee.class);
-		assertThat(response.getBody().getEmpId()).isEqualTo(1L);
+		assertThat(response.getBody().getEmpId()).isEqualTo("EMP_00001");
 	}
 
 }

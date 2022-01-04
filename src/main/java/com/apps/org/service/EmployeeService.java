@@ -13,10 +13,10 @@ public interface EmployeeService {
 	
 	public List<Employee> addNewEmployees(List<Employee> employeeRequest);
 	public List<Employee> getAllEmployees();
-	public Employee getEmployee(Long id);
+	public Employee getEmployee(String empId);
 	public List<Employee> updateEmployees(List<Employee> employeeRequest);
-	public void deleteEmployee(Long empId);
+	public void deleteEmployee(String empId);
 	public void deleteEmployees(List<Employee> employeeList);
-	public EmployeeAddressResponse updateEmployeeAddress(Long empId, EmployeeAddressRequest employeeAddressRequest);
+	public EmployeeAddressResponse updateEmployeeAddress(String empId, EmployeeAddressRequest employeeAddressRequest);
 
 }
