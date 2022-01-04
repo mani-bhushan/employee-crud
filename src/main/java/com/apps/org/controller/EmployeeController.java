@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,7 +22,6 @@ import com.apps.org.model.EmployeeAddressRequest;
 import com.apps.org.model.EmployeeAddressResponse;
 import com.apps.org.service.EmployeeService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/rest-api/v1")
 public class EmployeeController {
@@ -52,7 +50,7 @@ public class EmployeeController {
 	@PutMapping("/employees")
 	public ResponseEntity<List<Employee>> updateeEmployees(@RequestBody List<Employee> employeeRequest) {
 		List<Employee> response = employeeService.updateEmployees(employeeRequest);
-		return new ResponseEntity<>(response, HttpStatus.CREATED);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@PatchMapping(value = "/employees/{id}", produces = "application/json")
