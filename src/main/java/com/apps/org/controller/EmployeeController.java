@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,35 +26,36 @@ import com.apps.org.service.EmployeeService;
 @RequestMapping("/rest-api/v1")
 public class EmployeeController {
 
-
 	@Autowired
 	EmployeeService employeeService;
 
 	@PostMapping("/employees")
-	public ResponseEntity<List<Employee>> addNewEmployee (
-			@RequestBody List<Employee> employeeRequest) {
-		
-		List<Employee> response = employeeService.addNewEmployee(employeeRequest);
+	public ResponseEntity<List<Employee>> addNewEmployees(@Valid @RequestBody List<Employee> employeeRequest) {
+		List<Employee> response = employeeService.addNewEmployees(employeeRequest);
 		return new ResponseEntity<List<Employee>>(response, HttpStatus.CREATED);
-
 	}
 
 	@GetMapping("/employees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> response = employeeService.getAllEmployees();
 		return ResponseEntity.ok().body(response);
-	}	
-	
-	@GetMapping(value="/employees/{id}", produces="application/json")
-	public ResponseEntity<?> getEmployee(@PathVariable @Valid Long id) {
-			Employee employee = employeeService.getEmployee(id);
-			return ResponseEntity.ok().body(employee);
 	}
 
+	@GetMapping(value = "/employees/{id}", produces = "application/json")
+	public ResponseEntity<?> getEmployee(@PathVariable @Valid Long id) {
+		Employee employee = employeeService.getEmployee(id);
+		return ResponseEntity.ok().body(employee);
+	}
 
 	@PutMapping("/employees")
-	public ResponseEntity<List<Employee>> updateeEmployee(@RequestBody List<Employee> employeeRequest) {
-		List<Employee> response = employeeService.updateEmployee(employeeRequest);
+	public ResponseEntity<List<Employee>> updateeEmployees(@RequestBody List<Employee> employeeRequest) {
+		List<Employee> response = employeeService.updateEmployees(employeeRequest);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+	
+	@PatchMapping(value = "/employees/{id}", produces = "application/json")
+	public ResponseEntity<Employee> updateeEmployeeAddress(@RequestBody Employee employeeRequest) {
+		Employee response = null; // = employeeService.updateEmployees(employeeRequest);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
@@ -62,10 +64,10 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@DeleteMapping("/employees")
 	public ResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> employeeRequest) {
-		employeeService.deleteEmployee(employeeRequest);
+		employeeService.deleteEmployees(employeeRequest);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
