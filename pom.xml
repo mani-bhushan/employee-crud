@@ -75,5 +75,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>employee-crud-docker</finalName>
 	</build>
 </project>

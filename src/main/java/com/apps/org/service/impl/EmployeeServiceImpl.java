@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRequest.forEach(emp -> {
 			if (emp.getEmpId() != null) {
 				/* 
-				 * if request already have empId it will act as an update employee
+				 * If request already have empId it will act as an update employee
 				 * we can throw an exception or proceed according to the requirement. 
 				 * Here to keep it stick on a create request setting empId to null.
 				 * 
