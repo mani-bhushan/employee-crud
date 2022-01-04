@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.collections4.IterableUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apps.org.custom.exceptions.handler.EmployeeNotFoundException;
 import com.apps.org.dao.repositories.EmployeeRepository;
 import com.apps.org.entity.Employee;
+import com.apps.org.model.EmployeeAddressRequest;
+import com.apps.org.model.EmployeeAddressResponse;
 import com.apps.org.service.EmployeeService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@Autowired
 	private EmployeeRepository repository;
 
@@ -93,6 +99,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		});
 		
 		repository.deleteAll(employeeList);
+	}
+
+	@Override
+	public EmployeeAddressResponse updateEmployeeAddress(Long empId, EmployeeAddressRequest employeeAddressRequest) {
+
+		Optional<Employee> employee = repository.findById(empId);
+		if (employee.isPresent()) {
+			modelMapper.map(employeeAddressRequest, employee.get());
+			repository.save(employee.get());
+			return modelMapper.map(employee.get(), EmployeeAddressResponse.class);
+		} else {
+			throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + String.valueOf(empId));
+		}
 	}
 
 

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apps.org.entity.Employee;
+import com.apps.org.model.EmployeeAddressRequest;
+import com.apps.org.model.EmployeeAddressResponse;
 import com.apps.org.service.EmployeeService;
 
 @CrossOrigin
@@ -54,9 +56,9 @@ public class EmployeeController {
 	}
 	
 	@PatchMapping(value = "/employees/{id}", produces = "application/json")
-	public ResponseEntity<Employee> updateeEmployeeAddress(@RequestBody Employee employeeRequest) {
-		Employee response = null; // = employeeService.updateEmployees(employeeRequest);
-		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	public ResponseEntity<EmployeeAddressResponse> updateeEmployeeAddress(@PathVariable @Valid Long id, @Valid @RequestBody EmployeeAddressRequest employeeAddressRequest) {
+		EmployeeAddressResponse response = employeeService.updateEmployeeAddress(id, employeeAddressRequest);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/employees/{id}")
