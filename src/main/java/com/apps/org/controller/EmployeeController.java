@@ -30,7 +30,7 @@ public class EmployeeController {
 	EmployeeService employeeService;
 
 	@PostMapping("/employees")
-	public ResponseEntity<List<Employee>> addNewEmployees(@Valid @RequestBody List<Employee> employeeRequest) {
+	public ResponseEntity<List<Employee>> addNewEmployees(@RequestBody @Valid List<Employee> employeeRequest) {
 		List<Employee> response = employeeService.addNewEmployees(employeeRequest);
 		return new ResponseEntity<List<Employee>>(response, HttpStatus.CREATED);
 	}
@@ -48,14 +48,14 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/employees")
-	public ResponseEntity<List<Employee>> updateeEmployees(@RequestBody List<Employee> employeeRequest) {
+	public ResponseEntity<List<Employee>> updateEmployees(@RequestBody List<Employee> employeeRequest) {
 		List<Employee> response = employeeService.updateEmployees(employeeRequest);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@PatchMapping(value = "/employees/{empId}", produces = "application/json")
-	public ResponseEntity<EmployeeAddressResponse> updateeEmployeeAddress(@PathVariable @Valid String empId,
-			@Valid @RequestBody EmployeeAddressRequest employeeAddressRequest) {
+	public ResponseEntity<EmployeeAddressResponse> updateEmployeeAddress(@PathVariable @Valid String empId,
+			@RequestBody @Valid EmployeeAddressRequest employeeAddressRequest) {
 
 		EmployeeAddressResponse response = employeeService.updateEmployeeAddress(empId, employeeAddressRequest);
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -68,7 +68,7 @@ public class EmployeeController {
 	}
 
 	@DeleteMapping("/employees")
-	public ResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> employeeRequest) {
+	public ResponseEntity<?> deleteAllEmployees(@RequestBody @Valid List<Employee> employeeRequest) {
 		employeeService.deleteEmployees(employeeRequest);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

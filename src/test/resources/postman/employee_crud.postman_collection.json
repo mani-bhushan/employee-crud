@@ -1,0 +1,105 @@
+{
+	"variables": [],
+	"info": {
+		"name": "employee_crud",
+		"_postman_id": "dc721288-e7bd-1349-7ab9-17ac4d86e16e",
+		"description": "Spring Boot Application for Employee CRUD operations.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Employees",
+			"request": {
+				"url": "http://localhost:8888/rest-api/v1/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n    \t\"empId\": 2,\n        \"empName\": \"Mani\",\n        \"birthDate\": \"1994-09-13T18:30:00.000+00:00\",\n        \"hireDate\": \"2021-02-19T18:30:00.000+00:00\",\n        \"gender\": \"M\",\n        \"designation\": \"SSE\",\n        \"nationality\": \"Indian\",\n        \"isActive\": true,\n        \"addressLine1\": \"addressLine1\",\n        \"addressLine2\": \"addressLine2\",\n        \"mobile\": \"9934160126\",\n        \"city\": \"Giridih\",\n        \"state\": \"Jharkhand\",\n        \"country\": \"India\"\n    },\n    {\n    \t\"empId\": 1,\n        \"empName\": \"santosh\",\n        \"birthDate\": \"1994-09-13T18:30:00.000+00:00\",\n        \"hireDate\": \"2021-02-19T18:30:00.000+00:00\",\n        \"gender\": \"M\",\n        \"designation\": \"SSE\",\n        \"nationality\": \"Indian\",\n        \"isActive\": false,\n        \"addressLine1\": \"addressLine1\",\n        \"addressLine2\": \"addressLine2\",\n        \"mobile\": \"9135362747\",\n        \"city\": \"Giridih\",\n        \"state\": \"Jharkhand\",\n        \"country\": \"India\"\n    }\n]"
+				},
+				"description": "http://localhost:8888/rest-api/v1/employees"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"url": "http://localhost:8888/rest-api/v1/employees/EMP_00031",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "http://localhost:8888/rest-api/v1/employees/EMP_00031"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee Address",
+			"request": {
+				"url": "http://localhost:8888/rest-api/v1/employees/EMP_00032",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Siwan\",\n    \"state\": \"Bihar\",\n    \"country\": \"India\"\n}"
+				},
+				"description": "http://localhost:8888/rest-api/v1/employees/EMP_00032"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee ",
+			"request": {
+				"url": "http://localhost:8888/rest-api/v1/employees/EMP_00032",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Siwan\",\n    \"state\": \"Bihar\",\n    \"country\": \"India\"\n}"
+				},
+				"description": "http://localhost:8888/rest-api/v1/employees/EMP_00032"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employees",
+			"request": {
+				"url": "http://localhost:8888/rest-api/v1/employees",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n    \t\"empId\": \"EMP_00032\",\n        \"empName\": \"santosh kumar\",\n        \"birthDate\": \"1994-09-13T18:30:00.000+00:00\",\n        \"hireDate\": \"2021-02-19T18:30:00.000+00:00\",\n        \"gender\": \"M\",\n        \"designation\": \"SSE\",\n        \"nationality\": \"Indian\",\n        \"isActive\": true,\n        \"addressLine1\": \"addressLine1\",\n        \"addressLine2\": \"addressLine2\",\n        \"mobile\": \"9135362747\",\n        \"city\": \"Giridih\",\n        \"state\": \"Jharkhand\",\n        \"country\": \"India\"\n    }\n]"
+				},
+				"description": "http://localhost:8888/rest-api/v1/employees"
+			},
+			"response": []
+		}
+	]
+}

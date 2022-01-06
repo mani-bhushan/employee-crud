@@ -1,0 +1,18 @@
+[
+    {
+    	"empId": 2,
+        "empName": "empName",
+        "birthDate": "1994-09-13T18:30:00.000+00:00",
+        "hireDate": "2021-02-19T18:30:00.000+00:00",
+        "gender": "gender",
+        "designation": "designation",
+        "nationality": "nationality",
+        "isActive": true,
+        "addressLine1": "addressLine1",
+        "addressLine2": "addressLine2",
+        "mobile": "0123456789",
+        "city": "city1",
+        "state": "state1",
+        "country": "country1"
+    }
+]

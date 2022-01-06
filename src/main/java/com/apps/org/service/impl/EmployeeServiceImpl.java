@@ -31,12 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<Employee> employeeResp = new ArrayList<Employee>();
 		employeeRequest.forEach(emp -> {
 			if (emp.getEmpId() != null) {
-				/* 
-				 * If request already have empId it will act as an update employee
-				 * we can throw an exception or proceed according to the requirement. 
-				 * Here to keep it stick on a create request setting empId to null.
-				 * 
-				 * */
 				emp.setEmpId(null); 
 			}
 			employeeResp.add(repository.save(emp));
@@ -67,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRequest.forEach(emp -> {
 			if (emp.getEmpId() == null) { 
 				throw new NullPointerException("Please provide Employee ID.");
-			} else if (!(repository.findById(emp.getEmpId()).isPresent())) {
+			} else if (!(repository.findByEmpId(emp.getEmpId()).isPresent())) {
 				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + emp.getEmpId());
 			} else {
 				employeeResp.add(repository.save(emp));
@@ -96,7 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeList.forEach(emp -> {
 			if (emp.getEmpId() == null) {
 				throw new NullPointerException("Please provide Employee ID.");
-			} else if (!(repository.findById(emp.getEmpId()).isPresent())) {
+			} else if (!(repository.findByEmpId(emp.getEmpId()).isPresent())) {
 				throw new EmployeeNotFoundException("Please provide a valid Employee ID: " + emp.getEmpId());
 			}
 		});
