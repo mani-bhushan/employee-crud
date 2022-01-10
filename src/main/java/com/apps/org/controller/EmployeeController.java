@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apps.org.dto.EmployeeDTO;
 import com.apps.org.entity.Employee;
 import com.apps.org.model.EmployeeAddressRequest;
 import com.apps.org.model.EmployeeAddressResponse;
@@ -30,9 +31,9 @@ public class EmployeeController {
 	EmployeeService employeeService;
 
 	@PostMapping("/employees")
-	public ResponseEntity<List<Employee>> addNewEmployees(@RequestBody @Valid List<Employee> employeeRequest) {
-		List<Employee> response = employeeService.addNewEmployees(employeeRequest);
-		return new ResponseEntity<List<Employee>>(response, HttpStatus.CREATED);
+	public ResponseEntity<List<EmployeeDTO>> addNewEmployees(@RequestBody @Valid List<EmployeeDTO> employeeRequest) {
+		List<EmployeeDTO> response = employeeService.addNewEmployees(employeeRequest);
+		return new ResponseEntity<List<EmployeeDTO>>(response, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/employees")

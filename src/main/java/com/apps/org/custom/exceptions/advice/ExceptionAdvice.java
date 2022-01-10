@@ -21,7 +21,8 @@ public class ExceptionAdvice {
 	@ExceptionHandler(value = { EmployeeNotFoundException.class })
 	public ResponseEntity<?> handleException(EmployeeNotFoundException ex) {
 		logger.error("Exception: ", ex.getLocalizedMessage());
-		return new ResponseEntity<>(new Errors(HttpStatus.NO_CONTENT.value(), ex.getMessage()), HttpStatus.NO_CONTENT);
+		Errors errors = new Errors(HttpStatus.NO_CONTENT.value(), ex.getMessage());
+		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(value = { NullPointerException.class })

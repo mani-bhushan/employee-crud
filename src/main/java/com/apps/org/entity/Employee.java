@@ -17,10 +17,14 @@ import org.hibernate.annotations.Parameter;
 
 import com.apps.org.entity.generators.EmployeeSequenceIdGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name = "employee", uniqueConstraints = {
 		@UniqueConstraint(name = "UniqueEmployeeKey", columnNames = { "empName", "gender", "mobile", "isActive" }) })
 public class Employee implements Serializable {
@@ -50,7 +54,6 @@ public class Employee implements Serializable {
 	@NotNull
 	private String designation;
 
-	@NotNull
 	private String nationality;
 
 	@NotNull
@@ -63,7 +66,7 @@ public class Employee implements Serializable {
 	private String addressLine2;
 
 	@NotNull
-	@Size(min = 10, max = 10, message = "{Mobile number must be 10 digits.}")
+	@Size(min = 10, max = 10, message = "Mobile number must be 10 digits.")
 	private String mobile;
 
 	@NotNull
