@@ -2,11 +2,13 @@ package com.apps.org.custom.mapper;
 
 import java.util.Date;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.apps.org.custom.annotation.DesignationMapper;
@@ -17,8 +19,9 @@ import com.apps.org.model.EmployeeAddressResponse;
 
 @Mapper(
 		uses = {MyDateMapper.class},
-		componentModel = "spring",
-		nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+		componentModel = "spring"
+		// , nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE	// Class/ Mapper level configuration
+		)
 public interface EmployeeMapper {
 
 	@Named("genderFullForm")
@@ -61,6 +64,9 @@ public interface EmployeeMapper {
 	})
 	Employee convertEmployeeDTOToAddEmployeeEntity(EmployeeDTO emp);
 	
+	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+			nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS		// Method level configuration
+			)
 	Employee convertEmployeeAddressRequestToEmployeeEntity(EmployeeAddressRequest req, @MappingTarget Employee emp);
 
 	EmployeeAddressResponse convertEmployeeEntityToEmployeeAddressResponse(Employee employee);
